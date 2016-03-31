@@ -9,7 +9,6 @@ public abstract class Player {
 	protected int Colour;
 	protected Board playGround;
 
-	public abstract boolean makeMove(Move mv);
 	public abstract Move makeMove();
 	
 	public int getColor(){
@@ -18,4 +17,7 @@ public abstract class Player {
 	public void setColor(int arg){
 		this.Colour = arg;
 	}
+
+	public Board getBoard() {return this.playGround;}
+
 }

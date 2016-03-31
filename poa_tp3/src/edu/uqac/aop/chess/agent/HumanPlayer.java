@@ -9,30 +9,14 @@ public class HumanPlayer extends Player {
 		this.playGround = board;
 	}
 
-	@Override
-	public boolean makeMove(Move mv) {
-		// TODO Auto-generated method stub
-		if(mv == null)
-			return false;
-		if(!playGround.getGrid()[mv.xI][mv.yI].isOccupied())
-			return false;
-		if(playGround.getGrid()[mv.xI][mv.yI].getPiece().getPlayer() == this.getColor())
-			return false;
-		if(!playGround.getGrid()[mv.xI][mv.yI].getPiece().isMoveLegal(mv))
-			return false;		
-		playGround.movePiece(mv);
-			return true;
-	}
-
-	@Override
 	public Move makeMove() {
 		Move mv;
 		char initialX = '\0';
 		char initialY = '\0';
 		char finalX = '\0';
 		char finalY = '\0';
-		do{				
-			System.out.print ("Votre coup? <a2a4> ");				
+		do{
+			System.out.print ("Votre coup? <a2a4> ");
 			initialX = Lire();
 			initialY = Lire();
 			finalX = Lire();
@@ -44,7 +28,6 @@ public class HumanPlayer extends Player {
 		while(!makeMove(mv));
 		return mv;
 	}
-	
 
 
 	private static char Lire() {
@@ -64,8 +47,7 @@ public class HumanPlayer extends Player {
 
 	private static void ViderBuffer() {
 		try {
-			while (System.in.read() != '\n')
-				;
+			while (System.in.read() != '\n') ;
 		} catch (java.io.IOException e) {
 		}
 	}

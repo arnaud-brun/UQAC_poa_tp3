@@ -1,7 +1,8 @@
 package edu.uqac.aop.chess.agent;
 
-import java.util.Random;
 import edu.uqac.aop.chess.Board;
+
+import java.util.Random;
 
 public class AiPlayer extends Player {
 	// dies roooooll
@@ -12,22 +13,8 @@ public class AiPlayer extends Player {
 		this.playGround = board;
 	}
 
-	@Override
-	public boolean makeMove(Move mv) {
-		// TODO Auto-generated method stub
-		if (mv == null)
-			return false;
-		if (!playGround.getGrid()[mv.xI][mv.yI].isOccupied())
-			return false;
-		if (playGround.getGrid()[mv.xI][mv.yI].getPiece().getPlayer() == this.getColor())
-			return false;
-		if (!playGround.getGrid()[mv.xI][mv.yI].getPiece().isMoveLegal(mv))
-			return false;
-		playGround.movePiece(mv);
-		return true;
-	}
 
-	@Override
+
 	public Move makeMove() {
 		Move mv;
 		int iniX = -1, iniY = -1, finX = -1, finY = -1;
@@ -43,4 +30,5 @@ public class AiPlayer extends Player {
 		System.out.println("Votre coup? <" + mv.toString()+ ">");
 		return mv;
 	}
+
 }
