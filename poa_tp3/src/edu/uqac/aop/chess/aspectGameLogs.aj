@@ -4,62 +4,39 @@ import edu.uqac.aop.chess.agent.Move;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
 
 /**
  * Created by Arnaud on 31/03/2016.
  */
 public aspect aspectGameLogs {
 
-    String resourcePath = "gameLog.txt";
+    boolean test = false;
+    private String log_path="C:\\Users\\Utilisateur\\IdeaProjects\\UQAC_poa_tp3\\poa_tp3\\resources\\gameLog.txt";
+   // private String log_path= getClass().getClassLoader().getResource("gameLog.txt").getPath();
 
-    pointcut addLog(Move mv) : target(mv) && execution(void Board.movePiece(Move));
+    pointcut addLog(Move mv) : args(mv) && call(void Board.movePiece(Move));
 
-    /*
-    pointcut fuckIt() : execution(* *.*(..)) && !within(aspectGameLogs);
+    after(Move mv): addLog(mv){
 
-    before() : fuckIt(){
-        System.out.println("BEFORE fucking it !!!!!!!!!!!");
-
-
-        try {
-            File file = new File(getClass().getClassLoader().getResource("gameLog.txt").getPath());
-
+        if(!test){
+            File file = new File(log_path);
             if(file.exists()){
-                System.out.println("file exists :"+file.getAbsolutePath());
-            }else{
-                System.out.println("file doesnt exist :"+file.getAbsolutePath());
+                file.delete();
+                test=true;
             }
-
-            FileOutputStream f=new FileOutputStream(file);
-            f.write("fucking it\n".getBytes());
-
-            f.close();
-        } catch (Exception e) {
+        }
+        try {
+            FileWriter writer = new FileWriter(log_path,true);
+            writer.write(mv.toString()+ "\n");
+            writer.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
-    }
-    */
 
-    before(Move mv): addLog(mv){
-
-        System.out.println("BEFORE !!!!!!!!!!!");
-
-        try {
-            File file = new File(getClass().getClassLoader().getResource("gameLog.txt").getPath());
-
-            if(file.exists()){
-                System.out.println("file exists :"+file.getAbsolutePath());
-            }else{
-                System.out.println("file doesnt exist :"+file.getAbsolutePath());
-            }
-
-            FileOutputStream f=new FileOutputStream(file);
-            f.write(mv.toString().getBytes());
-            f.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 
