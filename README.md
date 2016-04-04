@@ -1,6 +1,10 @@
 # UQAC_poa_tp3
 
-Auteurs :
+##Auteurs :
+
+
 Brun Arnaud
+
 Desjardin Théo
+
 Faltot Alexandre
