@@ -3,11 +3,8 @@ package edu.uqac.aop.chess;
 import edu.uqac.aop.chess.agent.Move;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /**
  * Created by Arnaud on 31/03/2016.
@@ -31,7 +28,7 @@ public aspect aspectGameLogs {
         }
         try {
             FileWriter writer = new FileWriter(log_path,true);
-            writer.write(mv.toString()+ "\n");
+            writer.write(mv.toString()+ System.getProperty("line.separator"));
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
